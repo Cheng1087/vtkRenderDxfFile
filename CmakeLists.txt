@@ -1,0 +1,20 @@
+cmake_minimum_required(VERSION 3.4)
+project(testLibDXFrw)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+
+find_package(libdxfrw REQUIRED)
+
+set(VTK_DIR C:/Program Files/VTK)
+find_package(VTK REQUIRED)
+include(${VTK_USE_FILE})
+INCLUDE_DIRECTORIES(${VTK_INCLUDE_DIRS})
+link_libraries(${VTK_LIBRARIES})
+
+find_package(Qt5Core REQUIRED)
+find_package(Qt5Widgets REQUIRED)
+
+set(SOURCE_FILES main.cpp dx_iface.h dx_iface.cpp dx_data.h testVTKRender.h testVTKRender.cpp)
+add_executable(testLibDXFrw ${SOURCE_FILES})
+
+target_link_libraries(testLibDXFrw libdxfrw::libdxfrw ${VTK_LIBRARIES})
